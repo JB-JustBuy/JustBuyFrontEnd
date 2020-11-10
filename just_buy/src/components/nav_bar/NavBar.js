@@ -3,10 +3,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from "@material-ui/core/Grid"
-
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 const makeStyles = () => ({
     root:{
         display:'flex',
@@ -17,7 +18,16 @@ const makeStyles = () => ({
         alignItems:'center', 
         height:'100%'
     },
+    searchInput:{
+        height: '50%'
+    },
     title: {
+        display:'flex', 
+        justify:"center", 
+        alignItems:'center', 
+        height:'100%'
+    },
+    account:{
         display:'flex', 
         justify:"center", 
         alignItems:'center', 
@@ -29,15 +39,15 @@ class NavBar extends React.Component{
     render(){
         const styles = makeStyles();
         return(            
-            <div>
-                <Toolbar position="static">
+            <AppBar position="static" color='#primary'>
+                <Toolbar>
                     <Grid container spacing={2}>
                         <Grid item xs={1}>
                             <IconButton>
                                 <MenuIcon />
                             </IconButton>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={2}>
                             <div style={styles.title}>
                                 <Typography variant="h6" noWarp>
                                     Just Buy
@@ -46,21 +56,34 @@ class NavBar extends React.Component{
                         </Grid>
                         <Grid container xs={6} direction='row' justify='flex-start'>
                             <Grid item xs={8}>
-                                <TextField 
-                                    id='standard-basic'
-                                    label="Search...."
-                                    placeholder="Product's name + '+' + mode"
-                                    fullWidth />
+                                <div style={styles.searchInput}>
+                                    <TextField 
+                                        id='standard-basic'
+                                        label="Search...."
+                                        placeholder="Product's name + '+' + mode"
+                                        fullWidth />
+                                </div>
                            </Grid>
                            <Grid item xs={4}>
                                <div style = {styles.searchIcon}>
-                                    <SearchIcon />
+                                    <IconButton>
+                                        <SearchIcon />
+                                    </IconButton>
                                </div>
                             </Grid>
                         </Grid>
+                        <Grid item xs={1}>
+                        </Grid>
+                        <Grid container xs={2} justify='flex-end'>
+                            <div style={styles.account}>
+                                <IconButton>
+                                    <AccountCircleIcon fontSize="large"/>
+                                </IconButton>
+                            </div>
+                        </Grid>
                     </Grid>
                 </Toolbar>
-            </div>
+            </AppBar>
         );
     }
 }

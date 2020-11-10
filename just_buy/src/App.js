@@ -16,7 +16,7 @@ function App() {
       </div>    
       <Switch>
         <Route path="/" component={Home} />
-        <Route path='/search' component={NavBar}> </Route>
+        <Route path='/search' component={Home}> </Route>
       </Switch>
     </Router>
   );
