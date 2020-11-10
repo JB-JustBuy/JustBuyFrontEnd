@@ -35,7 +35,27 @@ const makeStyles = () => ({
     }
 })
 
+const hostConfig = {
+    base: '',
+    serachMethod: '',
+
+}
 class NavBar extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            searchValue: "1"
+        }
+    }
+    _handleSearchButtonClick = (e) => {
+        console.log(this.state.searchValue)
+    }
+    _handleSearcValueChange = (e) => {
+        this.setState({
+            searchValue: e.target.value
+        })
+        console.log(e.target.value)
+    }
     render(){
         const styles = makeStyles();
         return(            
@@ -61,12 +81,14 @@ class NavBar extends React.Component{
                                         id='standard-basic'
                                         label="Search...."
                                         placeholder="Product's name + '+' + mode"
-                                        fullWidth />
+                                        fullWidth
+                                        value={this.searchValue}
+                                        onChange={this._handleSearcValueChange}/>
                                 </div>
                            </Grid>
                            <Grid item xs={4}>
                                <div style = {styles.searchIcon}>
-                                    <IconButton>
+                                    <IconButton onClick={this._handleSearchButtonClick}>
                                         <SearchIcon />
                                     </IconButton>
                                </div>
