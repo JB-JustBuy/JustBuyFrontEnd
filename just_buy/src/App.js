@@ -5,15 +5,18 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import Home from './components/Home/home';
-import Search from './components/Search/search'
+import Home from './components/home/Home';
+import NavBar from './components/nav_bar/NavBar'
 
 function App() {
   return (
-    <Router>      
+    <Router>
+      <div>
+        <NavBar/>
+      </div>    
       <Switch>
-        <Route path="/" component={Search} />
-        <Route path='/search' component={Search}> </Route>
+        <Route path="/" component={Home} />
+        <Route path='/search' component={NavBar}> </Route>
       </Switch>
     </Router>
   );
