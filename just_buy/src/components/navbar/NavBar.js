@@ -1,5 +1,6 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
+import {makeStyles} from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,24 +11,20 @@ import Grid from "@material-ui/core/Grid"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-const makeStyles = () => ({
-    root:{
+import {Link} from 'react-router-dom';
+const styles = {
+    root: {
         display:'flex',
     },
     searchIcon: {
-        display:'flex', 
-        justify:"center", 
-        alignItems:'center', 
-        height:'100%'
+        
     },
     searchInput:{
-        height: '50%'
+        height: '30%',
+        marginBottom: 10
     },
     title: {
-        display:'flex', 
-        justify:"center", 
-        alignItems:'center', 
-        height:'100%'
+        marginTop:10
     },
     account:{
         display:'flex', 
@@ -35,13 +32,13 @@ const makeStyles = () => ({
         alignItems:'center', 
         height:'100%'
     }
-})
+};
+const test =  makeStyles((theme)=>({
+    inputInput:{
+        marginTop: 0
+    }
+}));
 
-const hostConfig = {
-    base: '',
-    serachMethod: '',
-
-}
 class NavBar extends React.Component{
     constructor(props){
         super(props);
@@ -73,46 +70,48 @@ class NavBar extends React.Component{
         });
         console.log(e.target.value);
     };
+
     render(){
-        const styles = makeStyles();
         return(            
-            <AppBar position="static" color='#primary'>
+            <AppBar position="static" color='inherit'>
                 <Toolbar>
                     <Grid container spacing={2}>
+ 
                         <Grid item xs={1}>
                             <IconButton>
-                                <MenuIcon />
+                                <MenuIcon/>
                             </IconButton>
                         </Grid>
+
                         <Grid item xs={2}>
-                            <div style={styles.title}>
-                                <Typography variant="h6" noWarp>
-                                    Just Buy
-                                </Typography>
-                            </div>
+                            <Typography style={styles.title} variant="h6">
+                                <Link to="">Just Buy</Link>
+                            </Typography>
                         </Grid>
-                        <Grid container xs={6} direction='row' justify='flex-start'>
-                            <Grid item xs={8}>
-                                <div style={styles.searchInput}>
+
+                        <Grid item xs={6}>
+                            <Grid container  direction='row' justify='center' alignItems="center">
+                                <Grid item xs={8}>
                                     <TextField 
+                                        classes={{input: test.inputInput}}
                                         id='standard-basic'
-                                        label="Search...."
-                                        placeholder="Product's name + '+' + mode"
+                                        placeholder="Search"
                                         fullWidth
                                         value={this.searchValue}
-                                        onChange={this._handleSearcValueChange}/>
-                                </div>
-                           </Grid>
-                           <Grid item xs={4}>
-                               <div style = {styles.searchIcon}>
-                                    <IconButton onClick={this._handleSearchButtonClick}>
-                                        <SearchIcon />
-                                    </IconButton>
-                               </div>
+                                        onChange={this._handleSearcValueChange}
+                                        />
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <div style = {styles.searchIcon}>
+                                        <IconButton onClick={this._handleSearchButtonClick}>
+                                            <SearchIcon/>
+                                        </IconButton>
+                                    </div>
+                                </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={1}>
-                        </Grid>
+                        
+
                         <Grid container xs={2} justify='flex-end'>
                             <div style={styles.account}>
                                 <IconButton onClick={this._handleProfileOpen}>
@@ -134,14 +133,15 @@ class NavBar extends React.Component{
                                     onClose={this._handleProfileClose}
                                 >
                                     <MenuItem>Account</MenuItem>
-                                    <MenuItem>Loging</MenuItem>
+
                                 </Menu>
                             </div>
                         </Grid>
+
                     </Grid>
                 </Toolbar>
             </AppBar>
-        );
+        )
     }
 }
-export default NavBar
+export default NavBar;
