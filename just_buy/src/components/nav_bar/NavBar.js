@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from "@material-ui/core/Grid"
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 const makeStyles = () => ({
     root:{
         display:'flex',
@@ -42,20 +44,35 @@ const hostConfig = {
 }
 class NavBar extends React.Component{
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
-            searchValue: "1"
+            anchorEl: null,
+            searchValue: null
         }
+    };
+
+    _handleProfileOpen = (e) => {
+        this.setState({
+            anchorEl: e.currentTarget
+        });
     }
+
+    _handleProfileClose = (e) => {
+        this.setState({
+            anchorEl: null
+        });    
+    };
+
     _handleSearchButtonClick = (e) => {
-        console.log(this.state.searchValue)
-    }
+        console.log(this.state.searchValue);
+    };
+    
     _handleSearcValueChange = (e) => {
         this.setState({
             searchValue: e.target.value
-        })
-        console.log(e.target.value)
-    }
+        });
+        console.log(e.target.value);
+    };
     render(){
         const styles = makeStyles();
         return(            
@@ -98,9 +115,27 @@ class NavBar extends React.Component{
                         </Grid>
                         <Grid container xs={2} justify='flex-end'>
                             <div style={styles.account}>
-                                <IconButton>
+                                <IconButton onClick={this._handleProfileOpen}>
                                     <AccountCircleIcon fontSize="large"/>
                                 </IconButton>
+                                <Menu
+                                    id='menu-appbar'
+                                    anchorEl={this.state.anchorEl}
+                                    anchorOrigin={{
+                                        'vertical': 'top',
+                                        'horizontal': 'right'
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(this.state.anchorEl)}
+                                    onClose={this._handleProfileClose}
+                                >
+                                    <MenuItem>Account</MenuItem>
+                                    <MenuItem>Loging</MenuItem>
+                                </Menu>
                             </div>
                         </Grid>
                     </Grid>
