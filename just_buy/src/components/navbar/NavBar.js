@@ -1,6 +1,5 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
-import {makeStyles} from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,16 +12,6 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import {Link} from 'react-router-dom';
 const styles = {
-    root: {
-        display:'flex',
-    },
-    searchIcon: {
-        
-    },
-    searchInput:{
-        height: '30%',
-        marginBottom: 10
-    },
     title: {
         marginTop:10
     },
@@ -33,11 +22,6 @@ const styles = {
         height:'100%'
     }
 };
-const test =  makeStyles((theme)=>({
-    inputInput:{
-        marginTop: 0
-    }
-}));
 
 class NavBar extends React.Component{
     constructor(props){
@@ -76,7 +60,6 @@ class NavBar extends React.Component{
             <AppBar position="static" color='inherit'>
                 <Toolbar>
                     <Grid container spacing={2}>
- 
                         <Grid item xs={1}>
                             <IconButton>
                                 <MenuIcon/>
@@ -92,8 +75,7 @@ class NavBar extends React.Component{
                         <Grid item xs={6}>
                             <Grid container  direction='row' justify='center' alignItems="center">
                                 <Grid item xs={8}>
-                                    <TextField 
-                                        classes={{input: test.inputInput}}
+                                    <TextField
                                         id='standard-basic'
                                         placeholder="Search"
                                         fullWidth
@@ -102,42 +84,40 @@ class NavBar extends React.Component{
                                         />
                                 </Grid>
                                 <Grid item xs={4}>
-                                    <div style = {styles.searchIcon}>
-                                        <IconButton onClick={this._handleSearchButtonClick}>
-                                            <SearchIcon/>
-                                        </IconButton>
-                                    </div>
+                                    <IconButton onClick={this._handleSearchButtonClick}>
+                                        <SearchIcon/>
+                                    </IconButton>
                                 </Grid>
                             </Grid>
                         </Grid>
                         
-
-                        <Grid container xs={2} justify='flex-end'>
-                            <div style={styles.account}>
-                                <IconButton onClick={this._handleProfileOpen}>
-                                    <AccountCircleIcon fontSize="large"/>
-                                </IconButton>
-                                <Menu
-                                    id='menu-appbar'
-                                    anchorEl={this.state.anchorEl}
-                                    anchorOrigin={{
-                                        'vertical': 'top',
-                                        'horizontal': 'right'
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    open={Boolean(this.state.anchorEl)}
-                                    onClose={this._handleProfileClose}
-                                >
-                                    <MenuItem>Account</MenuItem>
-
-                                </Menu>
-                            </div>
+                        <Grid item xs={3}>
+                            <Grid container justisy='flex-end'>
+                                <div style={styles.account}>
+                                    <IconButton onClick={this._handleProfileOpen}>
+                                        <AccountCircleIcon fontSize="large"/>
+                                    </IconButton>
+                                    <Menu
+                                        id='menu-appbar'
+                                        anchorEl={this.state.anchorEl}
+                                        anchorOrigin={{
+                                            'vertical': 'top',
+                                            'horizontal': 'right'
+                                        }}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        open={Boolean(this.state.anchorEl)}
+                                        onClose={this._handleProfileClose}
+                                    >
+                                        <MenuItem>Account</MenuItem>
+                                        <MenuItem>Login</MenuItem>
+                                    </Menu>
+                                </div>
+                            </Grid>
                         </Grid>
-
                     </Grid>
                 </Toolbar>
             </AppBar>

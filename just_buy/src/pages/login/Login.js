@@ -5,29 +5,24 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import TextFiled  from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-const styles = makeStyles({
-    root:{
-        minWidth: 275
-    }
-})
-class Login extends React.Component{
+const useStyles =  makeStyles({root:10});
 
-    render(){
-        return (
-            <div >
-                <Card className={styles.root} variant="outlined">
-                    <CardContent>
-                        <TextFiled id='user-account' label='Account'/>
-                        <TextFiled id='user-password' label='Passowrd'/>
-                    </CardContent>
-                    <CardActions>
-                        <Button>Login</Button>
-                    </CardActions>
-                </Card>
-            </div>
-        )
-    }
+export default function Login(){
+    const classes = useStyles();
+    console.log(classes.root)
+    return (            
+        <div >
+            <Card className={classes.root} variant="outlined">
+                <CardContent>
+                    <TextFiled id='user-account' label='Account'/>
+                    <TextFiled id='user-password' label='Passowrd'/>
+                </CardContent>
+                <CardActions>
+                    <Button>Login</Button>
+                </CardActions>
+            </Card>
+        </div>
+    )
 }
 
 
-export default Login
