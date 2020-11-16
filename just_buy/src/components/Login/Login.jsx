@@ -7,7 +7,7 @@ import TextFiled  from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 const useStyles =  makeStyles({root:10});
 
-export default function Login(){
+function Login(){
     const classes = useStyles();
     console.log(classes.root)
     return (            
@@ -25,4 +25,5 @@ export default function Login(){
     )
 }
 
-
+ 
+export {Login};

@@ -11,7 +11,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import {Link} from 'react-router-dom';
-import axios from 'axios';
+import {apiSearchMerchandise} from "../../api";
 
 const styles = {
     title: {
@@ -47,14 +47,23 @@ class NavBar extends React.Component{
     };
 
     _handleSearchButtonClick = (e) => {
-        axios.get("http://localhost:5000/search", {
-            params:{
-                'keyword': this.state.searchValue
+        // axios.get("http://localhost:5000/search", {
+        //     params:{
+        //         'keyword': this.state.searchValue
+        //     }
+        // }).then(res => {
+        //     console.log(res)
+        // }).catch(data =>{
+        //     console.log(data)
+        // })
+        apiSearchMerchandise(this.state.searchValue)
+        .then(res => {
+            if (res.status === 200){
+                console.log(res.data)
             }
-        }).then(res => {
-            console.log(res)
-        }).catch(data =>{
-            console.log(data)
+        })
+        .catch(err=> {
+            console.log(err);
         })
     };
     
@@ -134,4 +143,4 @@ class NavBar extends React.Component{
         )
     }
 }
-export default NavBar;
+export {NavBar};
