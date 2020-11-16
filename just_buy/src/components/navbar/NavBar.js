@@ -11,6 +11,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import {Link} from 'react-router-dom';
+import axios from 'axios';
+
 const styles = {
     title: {
         marginTop:10
@@ -45,14 +47,22 @@ class NavBar extends React.Component{
     };
 
     _handleSearchButtonClick = (e) => {
-        console.log(this.state.searchValue);
+        axios.get("http://localhost:5000/search", {
+            params:{
+                'keyword': this.state.searchValue
+            }
+        }).then(res => {
+            console.log(res)
+        }).catch(data =>{
+            console.log(data)
+        })
     };
     
     _handleSearcValueChange = (e) => {
         this.setState({
             searchValue: e.target.value
         });
-        console.log(e.target.value);
+        console.log(this.state.searchValue);
     };
 
     render(){
