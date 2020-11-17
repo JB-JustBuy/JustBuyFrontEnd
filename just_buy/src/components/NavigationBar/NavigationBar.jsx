@@ -98,7 +98,6 @@ class NavBar extends React.Component{
                                         id='standard-basic'
                                         placeholder="Search"
                                         fullWidth
-                                        value={this.searchValue}
                                         onChange={this._handleSearcValueChange}
                                         />
                                 </Grid>
