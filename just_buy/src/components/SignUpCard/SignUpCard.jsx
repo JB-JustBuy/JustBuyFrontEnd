@@ -1,17 +1,15 @@
 import React, {useState} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import TextFiled  from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Typography  from '@material-ui/core/Typography';
+import {useStyles} from './styles.jsx';
 import { apiSignupRequest } from "../../api";
 
-const useStyles =  makeStyles({
-    root: 10,
-});
 
-function Signup(props){
+function SignUpCard(props){
     const classes = useStyles();
     const [account, setAccount] = useState("")
     const [password, setPassword] = useState("")
@@ -32,33 +30,39 @@ function Signup(props){
             }
         })
     }
-    return (            
-        <div>
-            <Card className={classes.root} variant="outlined">
-                <CardContent>
+    return (
+        <Card className={classes.root} variant="outlined">
+            <CardContent>
+                <Typography className={classes.title}>
+                    SignUp
+                </Typography>
+                <Typography>
                     <TextFiled 
                         id='user-account'
                         label='Account'
-                        oncChange={(e)=>setAccount(e.target.value)}
-                        />
+                        variant="outlined"
+                        onChange={(e)=>setAccount(e.target.value)}
+                    />
+                </Typography>
+                <Typography>
                     <TextFiled
                         id='user-password'  
                         label='Passowrd'
-                        oncChange={(e)=>setPassword(e.target.value)}
-                        />
-                </CardContent>
-                { signUpFailed ? 
-                    <div style={{color:'red', marginLeft:12}}>
-                        <h5>Sign up failed</h5>
-                    </div> : null
-                }
-                <CardActions>
-                    <Button onClick={_handleSignUpOnClick}>Signup</Button>
-                </CardActions>
-            </Card>
-        </div>
+                        variant='outlined'
+                        onChange={(e)=>setPassword(e.target.value)}
+                    />
+                </Typography>
+            </CardContent>
+            { signUpFailed ? 
+                <div style={{color:'red', marginLeft:12}}>
+                    <h5>Sign up failed</h5>
+                </div> : null
+            }
+            <CardActions>
+                <Button onClick={_handleSignUpOnClick}>Signup</Button>
+            </CardActions>
+        </Card>
     )
 }
 
- 
-export {Signup};
+export {SignUpCard}

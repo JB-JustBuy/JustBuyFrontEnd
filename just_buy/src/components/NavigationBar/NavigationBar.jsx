@@ -47,15 +47,7 @@ class NavBar extends React.Component{
     };
 
     _handleSearchButtonClick = (e) => {
-        // axios.get("http://localhost:5000/search", {
-        //     params:{
-        //         'keyword': this.state.searchValue
-        //     }
-        // }).then(res => {
-        //     console.log(res)
-        // }).catch(data =>{
-        //     console.log(data)
-        // })
+
         apiSearchMerchandise(this.state.searchValue)
         .then(res => {
             if (res.status === 200){

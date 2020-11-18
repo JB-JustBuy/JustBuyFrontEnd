@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter,  Route, Link } from 'react-router-dom';
+import { BrowserRouter,  Route } from 'react-router-dom';
 import { Home } from '../Home';
 import { Login } from '../Login';
-import { NavBar } from '../NavigationBar';
+import { NavBar } from '../../components/NavigationBar';
 import { Signup } from '../Signup/Signup';
 
 class Main extends React.Component{
