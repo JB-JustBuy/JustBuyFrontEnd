@@ -4,9 +4,10 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import TextFiled  from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Typography  from '@material-ui/core/Typography';
+import Grid  from '@material-ui/core/Grid';
 import {useStyles} from './styles.jsx';
 import { apiSignupRequest } from "../../api";
+import { Typography } from '@material-ui/core';
 
 
 function SignUpCard(props){
@@ -33,34 +34,62 @@ function SignUpCard(props){
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
-                <Typography className={classes.title}>
-                    SignUp
-                </Typography>
-                <Typography>
-                    <TextFiled 
-                        id='user-account'
-                        label='Account'
-                        variant="outlined"
-                        onChange={(e)=>setAccount(e.target.value)}
-                    />
-                </Typography>
-                <Typography>
-                    <TextFiled
-                        id='user-password'  
-                        label='Passowrd'
-                        variant='outlined'
-                        onChange={(e)=>setPassword(e.target.value)}
-                    />
-                </Typography>
+                <div className={classes.title}>
+                    <Grid container>
+                        <Grid item xs={4}/>
+                        <Grid item xs={4}>
+                            <div className={classes.center}>
+                                <div><p>Sign Up</p></div>
+                            </div>
+                        </Grid>
+                        <Grid item xs={4}/>
+                    </Grid>
+                </div>
+                <div className={classes.account}>
+                    <div className={classes.input}>
+                        <TextFiled 
+                            id='user-account'
+                            label='Account'
+                            variant="outlined"
+                            fullWidth
+                            onChange={(e)=>setAccount(e.target.value)}
+                        />
+                    </div>
+                </div>
+                <div className={classes.password}>
+                    <div className={classes.input}>
+                        <TextFiled
+                            id='user-password'  
+                            label='Passowrd'
+                            variant='outlined'
+                            fullWidth
+                            onChange={(e)=>setPassword(e.target.value)}
+                        />
+                    </div>
+                </div>
             </CardContent>
             { signUpFailed ? 
                 <div style={{color:'red', marginLeft:12}}>
                     <h5>Sign up failed</h5>
                 </div> : null
             }
-            <CardActions>
-                <Button onClick={_handleSignUpOnClick}>Signup</Button>
-            </CardActions>
+            <div>
+                <Grid container>
+                    <Grid item xs={4}/>
+                    <Grid item xs={4}>
+                        <div className={classes.center}>
+                            <div>
+                                <CardActions>
+                                    <Button 
+                                    variant='outlined'
+                                    onClick={_handleSignUpOnClick}>Signup</Button>
+                                </CardActions>
+                             </div>
+                        </div>
+                    </Grid>
+                    <Grid item xs={4}/>
+                </Grid>
+            </div>
         </Card>
     )
 }
