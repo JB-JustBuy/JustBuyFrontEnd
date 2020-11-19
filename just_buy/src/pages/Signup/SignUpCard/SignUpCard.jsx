@@ -4,32 +4,45 @@ import {Card, CardActions, CardContent, Button, Typography, Grid} from '@materia
 import TextFiled from '@material-ui/core/TextField'
 import {useStyles} from './styles.jsx';
 import { apiSignupRequest } from "../../../api";
+import { useFormField } from './useFormField';
 
 function SignUpCard(props){
     const classes = useStyles();
     const history = useHistory();
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [field, handleFieldChange] = useFormField({
+        "username": "",
+        "email": "",
+        "password": "",
+        "confirmPassword": ""
+    });
     const [signUpFailed, setSignUpFailed] = useState(false);
+    const [failedReason, setFailedReason] = useState('');
 
+    
     function _handleSignUpOnClick(){
-        apiSignupRequest({
-            "username": username,
-            'email': email,
-            "password": password,
-        })
+        apiSignupRequest(field)
         .then(res=>res.data)
         .then(data=>{
-            console.log(data.message === "success")
-            if (data.message === "success"){
-                history.push("/")
-            }
-            else{
-                setSignUpFailed(true) 
-            }
+            handleSignUpResult(data);
+        })        
+    }
+    
+    function handleTextFieldChange(e){
+        handleFieldChange({
+            key: e.target.id, 
+            value: e.target.value
         })
     }
+
+    function handleSignUpResult(data){
+        if (data.message === 'success')
+            history.push("/")
+        else{
+            setSignUpFailed(true);
+            setFailedReason(data.message)
+        }
+    }
+
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
@@ -39,11 +52,11 @@ function SignUpCard(props){
                     </div>
                     <div className={classes.input}>
                         <TextFiled 
-                            id='user-account'
+                            id='username'
                             variant="outlined"
                             fullWidth
                             size='small'
-                            onChange={(e)=>setUsername(e.target.value)}
+                            onChange={handleTextFieldChange}
                         />
                     </div>
                 </div>
@@ -53,32 +66,46 @@ function SignUpCard(props){
                     </div>
                     <div className={classes.input}>
                         <TextFiled
-                            id='user-password'  
+                            id='email'  
                             variant='outlined'
                             fullWidth
                             size='small'
-                            onChange={(e)=>setEmail(e.target.value)}
+                            onChange={handleTextFieldChange}
                         />
                     </div>
                 </div>
                 <div className={classes.box}>
                     <div>
-                        <p className={classes.text}>password</p>
+                        <p className={classes.text}>Password</p>
                     </div>
                     <div className={classes.input}>
                         <TextFiled
-                            id='user-password'  
+                            id='password'  
                             variant='outlined'
                             fullWidth
                             size='small'
-                            onChange={(e)=>setPassword(e.target.value)}
+                            onChange={handleTextFieldChange}
+                        />
+                    </div>
+                </div>
+                <div className={classes.box}>
+                    <div>
+                        <p className={classes.text}>Confirm Password</p>
+                    </div>
+                    <div className={classes.input}>
+                        <TextFiled
+                            id='confirmPassword'  
+                            variant='outlined'
+                            fullWidth
+                            size='small'
+                            onChange={handleTextFieldChange}
                         />
                     </div>
                 </div>
             </CardContent>
             { signUpFailed ? 
                 <div style={{color:'red', marginLeft:12}}>
-                    <h5>Sign up failed</h5>
+                    <h5>{failedReason}</h5>
                 </div> : null
             }
             <div className={classes.center}>
