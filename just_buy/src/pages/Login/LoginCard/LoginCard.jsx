@@ -1,13 +1,7 @@
 import React, {useState} from 'react';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
+import {Card, CardActions, CardContent, Button} from '@material-ui/core';
 import TextFiled  from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Grid  from '@material-ui/core/Grid';
 import {useStyles} from './styles.jsx';
-import { apiSignupRequest } from "../../../api";
-import { Typography } from '@material-ui/core';
 
 function LoginCard(){
     const classes = useStyles();

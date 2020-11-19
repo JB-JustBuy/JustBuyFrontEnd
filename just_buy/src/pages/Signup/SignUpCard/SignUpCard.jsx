@@ -1,32 +1,29 @@
 import React, {useState} from 'react';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import TextFiled  from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Grid  from '@material-ui/core/Grid';
+import {useHistory} from 'react-router-dom'
+import {Card, CardActions, CardContent, Button, Typography, Grid} from '@material-ui/core';
+import TextFiled from '@material-ui/core/TextField'
 import {useStyles} from './styles.jsx';
 import { apiSignupRequest } from "../../../api";
-import { Typography } from '@material-ui/core';
-
 
 function SignUpCard(props){
     const classes = useStyles();
-    const [username, setUsername] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [signUpFailed, setSignUpFailed] = useState(false)
+    const history = useHistory();
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [signUpFailed, setSignUpFailed] = useState(false);
+
     function _handleSignUpOnClick(){
         apiSignupRequest({
             "username": username,
-            'email': 'email',
+            'email': email,
             "password": password,
         })
         .then(res=>res.data)
         .then(data=>{
             console.log(data.message === "success")
             if (data.message === "success"){
-                props.history.push('/')
+                history.push("/")
             }
             else{
                 setSignUpFailed(true) 
@@ -98,7 +95,7 @@ function SignUpCard(props){
                 </div>
             </div>
         </Card>
-    )
+    );
 }
 
-export {SignUpCard}
+export {SignUpCard};

@@ -102,7 +102,7 @@ class NavBar extends React.Component{
                         </Grid>
                         
                         <Grid item xs={3}>
-                            <Grid container justisy='flex-end'>
+                            <Grid container justify="flex-end">
                                 <div style={styles.account}>
                                     <IconButton onClick={this._handleProfileOpen}>
                                         <AccountCircleIcon fontSize="large"/>
