@@ -6,19 +6,21 @@ import TextFiled  from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid  from '@material-ui/core/Grid';
 import {useStyles} from './styles.jsx';
-import { apiSignupRequest } from "../../api";
+import { apiSignupRequest } from "../../../api";
 import { Typography } from '@material-ui/core';
 
 
 function SignUpCard(props){
     const classes = useStyles();
-    const [account, setAccount] = useState("")
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [signUpFailed, setSignUpFailed] = useState(false)
     function _handleSignUpOnClick(){
         apiSignupRequest({
-            "account": account,
-            "password": password
+            "username": username,
+            'email': 'email',
+            "password": password,
         })
         .then(res=>res.data)
         .then(data=>{
@@ -34,35 +36,44 @@ function SignUpCard(props){
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
-                <div className={classes.title}>
-                    <Grid container>
-                        <Grid item xs={4}/>
-                        <Grid item xs={4}>
-                            <div className={classes.center}>
-                                <div><p>Sign Up</p></div>
-                            </div>
-                        </Grid>
-                        <Grid item xs={4}/>
-                    </Grid>
-                </div>
-                <div className={classes.account}>
+                <div className={classes.box}>
+                     <div>
+                        <p className={classes.text}>Username</p>
+                    </div>
                     <div className={classes.input}>
                         <TextFiled 
                             id='user-account'
-                            label='Account'
                             variant="outlined"
                             fullWidth
-                            onChange={(e)=>setAccount(e.target.value)}
+                            size='small'
+                            onChange={(e)=>setUsername(e.target.value)}
                         />
                     </div>
                 </div>
-                <div className={classes.password}>
+                <div className={classes.box}>
+                    <div>
+                        <p className={classes.text}>Email</p>
+                    </div>
                     <div className={classes.input}>
                         <TextFiled
                             id='user-password'  
-                            label='Passowrd'
                             variant='outlined'
                             fullWidth
+                            size='small'
+                            onChange={(e)=>setEmail(e.target.value)}
+                        />
+                    </div>
+                </div>
+                <div className={classes.box}>
+                    <div>
+                        <p className={classes.text}>password</p>
+                    </div>
+                    <div className={classes.input}>
+                        <TextFiled
+                            id='user-password'  
+                            variant='outlined'
+                            fullWidth
+                            size='small'
                             onChange={(e)=>setPassword(e.target.value)}
                         />
                     </div>
@@ -73,22 +84,18 @@ function SignUpCard(props){
                     <h5>Sign up failed</h5>
                 </div> : null
             }
-            <div>
-                <Grid container>
-                    <Grid item xs={4}/>
-                    <Grid item xs={4}>
-                        <div className={classes.center}>
-                            <div>
-                                <CardActions>
-                                    <Button 
-                                    variant='outlined'
-                                    onClick={_handleSignUpOnClick}>Signup</Button>
-                                </CardActions>
-                             </div>
-                        </div>
-                    </Grid>
-                    <Grid item xs={4}/>
-                </Grid>
+            <div className={classes.center}>
+                <div className={classes.apply_box}>
+                    <CardActions>
+                        <Button 
+                            id = "login"
+                            variant='contained'
+                            fullWidth
+                            color='primary'
+                            size='large'
+                            onClick={_handleSignUpOnClick}>Sign up</Button>
+                    </CardActions>
+                </div>
             </div>
         </Card>
     )
