@@ -1,27 +1,33 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import TextFiled  from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-const useStyles =  makeStyles({root:10});
+
+import React, {useState} from 'react';
+import Typography  from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import {LoginCard} from "./LoginCard";
+import {ToSignUp} from './ToSignUp'
+import {useStyles} from './styles.jsx';
 
 function Login(){
     const classes = useStyles();
-    console.log(classes.root)
-    return (            
-        <div >
-            <Card className={classes.root} variant="outlined">
-                <CardContent>
-                    <TextFiled id='user-account' label='Account'/>
-                    <TextFiled id='user-password' label='Passowrd'/>
-                </CardContent>
-                <CardActions>
-                    <Button>Login</Button>
-                </CardActions>
-            </Card>
-        </div>
+    return (
+        <Container>
+            <div className={classes.white_space} />
+            <Grid container>
+                <Grid item xs={4}/>
+                <Grid item xs={4}>
+                    <LoginCard />
+                </Grid>
+                <Grid item xs={4}/>
+            </Grid>
+            <div className={classes.white_space}/>
+            <Grid container>
+                <Grid item xs={4}/>
+                <Grid item xs={4}>
+                    <ToSignUp />
+                </Grid>
+                <Grid item xs={4}/>
+            </Grid>            
+        </Container>     
     )
 }
 

@@ -15,7 +15,7 @@ const signUpRequest = axios.create({
 const apiSearchMerchandise = (keyword) => searchRequest.get('', {params:{ "keyword": keyword}})  
 
 // about user sign up
-const apiSignupRequest = (props) =>  signUpRequest.post('/', {"account": props.account, "password": props.password})
+const apiSignupRequest = (props) =>  signUpRequest.post('/', {"username": props.username, "email": props.email, "password": props.password})
 
 export {apiSearchMerchandise}
 export {apiSignupRequest}
